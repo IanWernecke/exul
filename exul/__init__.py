@@ -17,8 +17,8 @@ from Xlib.protocol.request import InternAtom
 from Xlib.XK import string_to_keysym
 
 
-# a global display object
-g_display = Display()
+# global display object
+DISPLAY = Display()
 
 
 # 24 ms
@@ -124,7 +124,7 @@ def send_event(
     # client.
     window.send_event(e)
 
-    # todo: does this work?
+    # TODO: does this work?
     # window.display.sync()
     window.display.flush()
 
@@ -149,8 +149,7 @@ def find_window(window=None, window_id=None, window_name=None, class_type=None, 
 
     # root node
     if window is None:
-        global g_display
-        window = g_display.screen().root
+        window = DISPLAY.screen().root
 
     # walk each child
     for child in window.query_tree().children:
@@ -347,7 +346,6 @@ def get_key_code(c):
     # future use: (according to xlib/display)
     #   keycode_to_keysym(keycode, index)
     #   index: 0 == unshifted, 1 == shifted, 2 == alt, 3==shift+alt
-    global g_display
 
     # some convenient conversions
     if c == 'Ctrl':
@@ -359,7 +357,7 @@ def get_key_code(c):
     if sym == 0:
         raise Exception('NoSymbol found for character: {}'.format(c))
 
-    code = g_display.keysym_to_keycode(sym)
+    code = DISPLAY.keysym_to_keycode(sym)
 
     return code
 
@@ -515,8 +513,7 @@ def get_pointer_coordinates():
 
     :return: the coordinates of the pointer
     """
-    global g_display
-    return g_display.screen().root.query_pointer()._data
+    return DISPLAY.screen().root.query_pointer()._data
 
 
 # ugly hacked code from nullege

@@ -1,1 +1,16 @@
+""""""
 # TODO: make setup.py build the exul wheel
+
+import os
+from setuptools import setup, find_packages
+
+setup(
+    name='exul',
+    version='0.0.1',
+    author='IanWernecke',
+    description='A package for handling Xlib operations in an easy-to-use fashion.',
+    license='GPLv3',
+    keywords='xlib xwindows x-windows mouse keyboard event events',
+    url='http://github.com/IanWernecke/exul',
+    packages=find_packages()
+)
