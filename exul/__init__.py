@@ -190,6 +190,23 @@ def find_window(window=None, window_id=None, window_name=None, class_type=None, 
     return None
 
 
+def windows():
+    """
+    Walk each available window running on the system, depth first.
+    :yield: ((window), (int)) yield a window object and the level at which the window resides
+    """
+    # hold the window and the level as each item in the list
+    all_windows = [(DISPLAY.screen().root, 0)]
+    while len(all_windows) > 0:
+
+        window, level = all_windows.pop(0)
+        yield window, level
+
+        # insert each child in reverse so the normal order is preserved
+        for child in window.query_tree().children[::-1]:
+            all_windows.insert(0, (child, level + 1))
+
+
 #
 #   general mouse functions
 #
