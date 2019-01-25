@@ -1,5 +1,4 @@
-""""""
-# TODO: make setup.py build the exul wheel
+"""This file is used for creating and installing the package."""
 
 import os
 from setuptools import setup, find_packages
@@ -12,5 +11,10 @@ setup(
     license='GPLv3',
     keywords='xlib xwindows x-windows mouse keyboard event events',
     url='http://github.com/IanWernecke/exul',
-    packages=find_packages()
+    packages=find_packages(),
+    install_requires=[
+        'Pillow',
+        'Xlib'
+    ]
 )
+
