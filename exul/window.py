@@ -1,7 +1,7 @@
 """A file for holding the Window class, which wraps utility methods."""
 
 
-from .utilities import MOUSE_LEFT, MOUSE_RIGHT, click, click_left, click_right, get_image, get_screenshot, \
+from .utilities import MOUSE_LEFT, click, click_left, click_right, get_image, get_screenshot, \
     get_window_pid, mouse_down, mouse_move, mouse_up, scroll_down, scroll_up, send_key, send_keys
 
 

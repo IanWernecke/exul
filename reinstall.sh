@@ -50,5 +50,5 @@ echo "Complete: $tool installation."
 
 
 echo "Beginning: $tool test ..."
-$vpy -m exul enumeratex
+$vpy -m exul enumerate
 echo "Complete: $tool test."

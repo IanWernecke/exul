@@ -1,6 +1,9 @@
 """Execute common exul commands."""
 
 
+import logging
+
+
 from . import find_window, windows
 from .decorators import MainCommands
 
@@ -28,8 +31,7 @@ FIND_WINDOW_ARGS = [
 
 @MainCommands(
     ('enumerate', 'Enumerate all windows on the system.', []),
-    ('find', 'Find a particular window by the given information.', FIND_WINDOW_ARGS),
-    ('geometry', 'Find the geometry of a particular window.', FIND_WINDOW_ARGS)
+    ('find', 'Find a particular window by the given information.', FIND_WINDOW_ARGS)
 )
 def main(args):
     """
@@ -41,19 +43,25 @@ def main(args):
             print('  ' * level, window)
         return 0
 
-    # dump information about a particular window
-    if args.command in ('find', 'geometry'):
+    # attempt to find a particular window
+    if args.command == 'find':
+
+        # find the window
         window = find_window(
             window_id=args.window_id,
             window_name=args.window_name,
             class_type=args.class_type,
             class_name=args.class_name
         )
-        if args.command == 'find':
-            print(window)
-        elif args.command == 'geometry':
-            print(window.get_geometry())
 
+        # window not found
+        if window is None:
+            msg = 'Unable to find window with arguments: {0}'.format(args)
+            logging.exception(msg)
+            raise RuntimeError(msg)
+
+        # print the window that was found
+        print(window)
         return 0
 
     # TODO: MOAR
