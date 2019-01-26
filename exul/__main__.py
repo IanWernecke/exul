@@ -28,7 +28,6 @@ FIND_WINDOW_ARGS = [
 
 @MainCommands(
     ('enumerate', 'Enumerate all windows on the system.', []),
-    ('enumeratex', 'Enumerate extended information about windows on the system.', []),
     ('find', 'Find a particular window by the given information.', FIND_WINDOW_ARGS),
     ('geometry', 'Find the geometry of a particular window.', FIND_WINDOW_ARGS)
 )
@@ -37,31 +36,9 @@ def main(args):
 
     """
     # dump information about windows on the system
-    if args.command in ('enumerate', 'enumeratex'):
+    if args.command == 'enumerate':
         for window, level in windows():
-
-            # initialize the list of information
-            parts = []
-            if level > 0:
-                parts.append(level * '  ')
-
-            parts.append('--window-id={0}'.format(window.id))
-            if window.name is not None:
-                parts.append('--window-name="{0}"'.format(window.name))
-            if window.class_type is not None:
-                parts.append('--class-type="{0}"'.format(window.class_type))
-            if window.class_name is not None:
-                parts.append('--class-name="{0}"'.format(window.class_name))
-
-            # append geometry information if the command is enumeratex
-            if args.command == 'enumeratex':
-                geos = window.get_geometry()
-                parts.append('--x {0} --y {1} --width {2} --height {3}'.format(
-                    geos.x, geos.y, geos.width, geos.height
-                ))
-
-            print(' '.join(parts))
-
+            print('  ' * level, window)
         return 0
 
     # dump information about a particular window
