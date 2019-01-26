@@ -19,6 +19,17 @@ class Window(object):
         else:
             self.class_type, self.class_name = wm_class
 
+    def __str__(self):
+        """Create a string-version of the window."""
+        geos = self.get_geometry()
+        return (
+            '<Window id="{0}" name="{1}" class_type="{2}" class_name="{3}" '
+            'x={4} y={5} width={6} height={7}>'
+        ).format(
+            self.id, self.name, self.class_type, self.class_name,
+            geos.x, geos.y, geos.width, geos.height
+        )
+
     #
     #   class properties
     #
