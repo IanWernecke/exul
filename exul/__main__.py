@@ -45,18 +45,13 @@ def main(args):
             if level > 0:
                 parts.append(level * '  ')
 
-            # append window id and name
-            parts.append((
-                '--window-id={0} '
-                '--window-name="{1}"'
-            ).format(window.id, window.get_wm_name()))
-
-            # attempt to append window class information
-            window_class = window.get_wm_class()
-            if window_class is not None:
-                parts.append((
-                    '--class-type="{0}" --class-name="{1}"'
-                ).format(window_class[0], window_class[1]))
+            parts.append('--window-id={0}'.format(window.id))
+            if window.name is not None:
+                parts.append('--window-name="{0}"'.format(window.name))
+            if window.class_type is not None:
+                parts.append('--class-type="{0}"'.format(window.class_type))
+            if window.class_name is not None:
+                parts.append('--class-name="{0}"'.format(window.class_name))
 
             # append geometry information if the command is enumeratex
             if args.command == 'enumeratex':
