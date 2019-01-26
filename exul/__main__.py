@@ -1,3 +1,6 @@
+"""Execute common exul commands."""
+
+
 from . import find_window, windows
 from .decorators import MainCommands
 

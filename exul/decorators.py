@@ -1,10 +1,14 @@
 #!python3
 """This file is designed to provide decorators for other files."""
+# pylint: disable=useless-object-inheritance; aiming for py2 and py3 compatability
+# pylint: disable=too-few-public-methods; inheritance not accounted for
 
 
 import argparse
 import inspect
 import logging
+import os
+import shlex
 import sys
 
 from functools import wraps
@@ -61,7 +65,7 @@ class ArgumentIntercept(object):
             if (arguments is None) or isinstance(arguments, list):
                 args = self.parser.parse_args(arguments)
 
-            elif isinstance(arguments, unicode) or isinstance(arguments, str):
+            elif isinstance(arguments, (str, unicode)):
                 args = self.parser.parse_args(shlex.split(arguments))
 
             else:
@@ -275,22 +279,10 @@ class LogDecoratorContainer(object):
 
 
 # define some convenient decorator containers
+# pylint: disable=invalid-name; these are fine decorator names
 notset = LogDecoratorContainer(logging.NOTSET)
 debug = LogDecoratorContainer(logging.DEBUG)
 info = LogDecoratorContainer(logging.INFO)
 warning = LogDecoratorContainer(logging.WARNING)
 error = LogDecoratorContainer(logging.ERROR)
 critical = LogDecoratorContainer(logging.CRITICAL)
-
-
-@Main()
-@info.all
-def main(args):
-    """
-    When this script is the main one executed, this function will be performed.
-
-    :param args: a Namespace object
-    :return: a system exit code
-    """
-    # write code here
-    return 0
