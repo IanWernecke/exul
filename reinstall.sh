@@ -9,9 +9,8 @@ vexists=$($py -m pip list | grep "^virtualenv" | wc -l)
 if [[ $vexists -eq 0 ]]; then
     echo "Virtual Environment not installed."
     exit 1
-else
-    echo "Virtual Environment is installed."
 fi
+echo "Virtual Environment is installed."
 
 
 # create or clean the virtual environment
@@ -23,33 +22,11 @@ echo "Virtual Environment ready."
 
 
 # ensure the virtual python binary exists
-if [[ -f $vpy ]]; then
-    echo "Virtual Python found."
-else
+if [[ ! -f $vpy ]]; then
     echo "Virtual Python not found!"
     exit 1
 fi
-
-
-# if the virtual environment has a previous
-# version of the wheel installed, uninstall it
-# toolexists=$($vpy -m pip list | grep "^$tool" | wc -l)
-# if [[ $toolexists -gt 0 ]]; then
-# 
-#     pushd $virtual
-#     $vpy -m pip uninstall -y $tool
-#     popd
-# 
-#     # if the virtual environment still has the tool installed,
-#     # something went wrong
-#     toolexists=$($vpy -m pip list | grep "^$tool" | wc -l)
-#     if [[ $toolexists -gt 0 ]]; then
-#         echo "$toolexists"
-#         echo "Unable to uninstall tool: $tool"
-#         exit 1
-#     fi
-# 
-# fi
+echo "Virtual Python found."
 
 
 # clean up old wheels
@@ -75,5 +52,3 @@ echo "Complete: $tool installation."
 echo "Beginning: $tool test ..."
 $vpy -m exul enumeratex
 echo "Complete: $tool test."
-
-
