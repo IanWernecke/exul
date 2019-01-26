@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='exul',
-    version='0.0.1',
+    version='0.0.2',
     author='IanWernecke',
     author_email='IanWernecke@protonmail.com',
     description='A package for handling Xlib operations in an easy-to-use fashion.',
@@ -18,4 +18,3 @@ setup(
         'Xlib'
     ]
 )
-

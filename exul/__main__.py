@@ -61,7 +61,9 @@ def main(args):
             # append geometry information if the command is enumeratex
             if args.command == 'enumeratex':
                 geos = window.get_geometry()
-                parts.append(f'--x {geos.x} --y {geos.y} --width {geos.width} --height {geos.height}')
+                parts.append('--x {0} --y {1} --width {2} --height {3}'.format(
+                    geos.x, geos.y, geos.width, geos.height
+                ))
 
             print(' '.join(parts))
 

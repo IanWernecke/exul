@@ -52,6 +52,15 @@ fi
 # fi
 
 
+# clean up old wheels
+dist="$(pwd)/dist"
+echo "Beginning: Removing old wheels ..."
+if [[ -d $dist && $(ls $dist/exul*.whl | wc -l) -gt 0 ]]; then
+    rm $dist/exul*.whl
+fi
+echo "Complete: Removing old wheels."
+
+
 # build the wheel
 echo "Building: $tool wheel ..."
 $vpy setup.py bdist_wheel
@@ -59,7 +68,7 @@ echo "Complete: $tool wheel ..."
 
 
 echo "Beginning: $tool installation ..."
-$vpy -m pip install --upgrade dist/exul*.whl
+$vpy -m pip install --upgrade $dist/exul*.whl
 echo "Complete: $tool installation."
 
 
