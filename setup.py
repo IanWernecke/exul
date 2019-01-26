@@ -7,6 +7,7 @@ setup(
     name='exul',
     version='0.0.1',
     author='IanWernecke',
+    author_email='IanWernecke@protonmail.com',
     description='A package for handling Xlib operations in an easy-to-use fashion.',
     license='GPLv3',
     keywords='xlib xwindows x-windows mouse keyboard event events',
