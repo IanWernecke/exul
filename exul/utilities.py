@@ -1,5 +1,4 @@
 """This library handles various function calls to an X window server."""
-# pylint: disable=invalid-name; x and y are perfectly valid names for coordinates
 
 
 # standard imports
@@ -62,7 +61,7 @@ def send_event(
         x=0,
         y=0,
         modifiers=0
-    ):
+    ):  # pylint: disable=too-many-arguments; complex function
     """
     Send an event to a given window.
 
@@ -276,7 +275,7 @@ def scroll_up(window, x, y, repeat=1):
 #   key functions
 #
 
-def get_key_code(c):
+def get_key_code(character):
     """
     Given a character (string), convert the value into one that can be used in events.
 
@@ -288,14 +287,14 @@ def get_key_code(c):
     #   index: 0 == unshifted, 1 == shifted, 2 == alt, 3==shift+alt
 
     # some convenient conversions
-    if c == 'Ctrl':
-        c = 'Control'
-    elif c == 'Enter':
-        c = 'Return'
+    if character == 'Ctrl':
+        character = 'Control'
+    elif character == 'Enter':
+        character = 'Return'
 
-    sym = string_to_keysym(c)
+    sym = string_to_keysym(character)
     if sym == 0:
-        raise Exception('NoSymbol found for character: {}'.format(c))
+        raise Exception('NoSymbol found for character: {}'.format(character))
 
     code = DISPLAY.keysym_to_keycode(sym)
 

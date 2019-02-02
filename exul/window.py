@@ -5,7 +5,7 @@ from .utilities import MOUSE_LEFT, click, click_left, click_right, get_image, ge
     get_window_pid, mouse_down, mouse_move, mouse_up, scroll_down, scroll_up, send_key, send_keys
 
 
-class Window(object):
+class Window(object):  # pylint: disable=useless-object-inheritance; trying for py2 and py3 compatability
     """A class for passing around a window reference to common utility methods."""
 
     def __init__(self, window):
@@ -66,15 +66,19 @@ class Window(object):
         return click_right(self._window, x, y)
 
     def get_geometry(self):
+        """Obtain the window geometry."""
         return self._window.get_geometry()
 
     def get_image(self, x, y, width, height):
+        """Get a part of the window as an image."""
         return get_image(self._window, x, y, width, height)
 
     def get_pid(self):
+        """Obtain the process ID associated with the window."""
         return get_window_pid(self._window)
 
     def get_screenshot(self):
+        """Get the entire window as an image."""
         return get_screenshot(self._window)
 
     def mouse_down(self, x, y, code):

@@ -34,9 +34,7 @@ FIND_WINDOW_ARGS = [
     ('find', 'Find a particular window by the given information.', FIND_WINDOW_ARGS)
 )
 def main(args):
-    """
-
-    """
+    """Perform some function for the user, depending upon the command given."""
     # dump information about windows on the system
     if args.command == 'enumerate':
         for window, level in windows():

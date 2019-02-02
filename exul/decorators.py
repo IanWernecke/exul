@@ -234,8 +234,8 @@ class LogArguments(LogLevelContainer):
         def wrapper(*args, **kwargs):
             for arg in args:
                 logging.log(self.level, 'Function: %s, Arg: %r', function.__name__, arg)
-            for k in kwargs:
-                logging.log(self.level, 'Function: %s, Key: %r, Value: %r', function.__name__, k, kwargs[k])
+            for key in kwargs:
+                logging.log(self.level, 'Function: %s, Key: %r, Value: %r', function.__name__, key, kwargs[key])
             return function(*args, **kwargs)
         return wrapper
 
