@@ -87,10 +87,10 @@ def main(args):
             args.width,
             args.height
         )
-        if args.location is not None:
-            img.save(args.location)
-        else:
+        if args.location is None:
             img.show()
+        else
+            img.save(args.location)
         return 0
 
     return 0
