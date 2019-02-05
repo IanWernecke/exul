@@ -5,6 +5,24 @@ from .utilities import DISPLAY
 from .window import Window
 
 
+def enumerate_windows_and_levels():
+    """
+    Walk each available window running on the system, depth first.
+    :yield: ((window), (int)) yield a window object and the level at which the window resides
+    """
+    # hold the window and the level as each item in the list
+    all_windows = [(Window(DISPLAY.screen().root), 0)]
+    while all_windows:
+
+        window, level = all_windows.pop(0)
+        yield window, level
+
+        # insert each child in reverse so the normal order is preserved
+        # for child in window.query_tree().children[::-1]:
+        for child in window.children[::-1]:
+            all_windows.insert(0, (Window(child), level + 1))
+
+
 def find_window(window_id=None, window_name=None, class_type=None, class_name=None):
     """
     Find a window by a piece(s) of given information.
@@ -48,14 +66,5 @@ def windows():
     Walk each available window running on the system, depth first.
     :yield: ((window), (int)) yield a window object and the level at which the window resides
     """
-    # hold the window and the level as each item in the list
-    all_windows = [(Window(DISPLAY.screen().root), 0)]
-    while all_windows:
-
-        window, level = all_windows.pop(0)
-        yield window, level
-
-        # insert each child in reverse so the normal order is preserved
-        # for child in window.query_tree().children[::-1]:
-        for child in window.children[::-1]:
-            all_windows.insert(0, (Window(child), level + 1))
+    for window, _ in enumerate_windows_and_levels():
+        yield window

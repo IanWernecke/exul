@@ -4,7 +4,7 @@
 import logging
 
 
-from . import find_window, windows
+from . import enumerate_windows_and_levels, find_window
 from .decorators import MainCommands
 
 
@@ -51,7 +51,7 @@ def main(args):
     """Perform some function for the user, depending upon the command given."""
     # dump information about windows on the system
     if args.command == 'enumerate':
-        for window, level in windows():
+        for window, level in enumerate_windows_and_levels():
             print('  ' * level, window)
         return 0
 
@@ -89,7 +89,7 @@ def main(args):
         )
         if args.location is None:
             img.show()
-        else
+        else:
             img.save(args.location)
         return 0
 
